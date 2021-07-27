@@ -1,21 +1,34 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar as ExpoStatusBar } from "expo-status-bar";
+
+import React from "react";
+
+import { ImageBackground, StyleSheet, View } from "react-native";
 
 export default function App() {
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ImageBackground 
+      source={ require( "./assets/green_felt.jpg" ) }
+      style={ stylesheet.backgroundImage }
+    >
+      <View style={ stylesheet.container }>
+        <ExpoStatusBar style="auto" />
+      </View>
+    </ImageBackground >
   );
+
 }
 
-const styles = StyleSheet.create({
+const stylesheet = StyleSheet.create( {
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
-});
+  backgroundImage: {
+    flex: 1,
+    width: null,
+    height: null
+  },
+  // : {},
+} );
