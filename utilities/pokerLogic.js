@@ -1,7 +1,7 @@
 const { flushes, fiveUniqueCards, hashAdjust, hashValues } = require( "./lookupTables" );
 
 exports.suits = { 8: "Clubs", 4: "Diamonds", 2: "Hearts", 1: "Spades" };
-exports.rankPrimes = [ 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41 ];
+const rankPrimes = [ 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41 ];
 
 exports.rank = card => ( card >>> 8 ) % 16;
 exports.suit = card => ( card >>> 12 ) % 16;
@@ -13,7 +13,7 @@ exports.cardName = card => `${ this.rankNames[ this.rank( card ) ] } of ${ this.
 exports.fullDeck = shuffled => {
     const result = [];
     for ( let rank = 0; rank < 13; rank++ ) for ( let suit of [ 8, 4, 2, 1 ] )
-        result.push( ( this.rankPrimes[ rank ] ) | ( rank << 8 ) | ( suit << 12 ) | ( ( 1 << rank ) << 16 ) );
+        result.push( ( rankPrimes[ rank ] ) | ( rank << 8 ) | ( suit << 12 ) | ( ( 1 << rank ) << 16 ) );
     if ( !shuffled ) return result;
     for ( let i = 51; i > 0; i-- ) {
         const j = Math.floor( Math.random() * ( i + 1 ) );

@@ -1,12 +1,13 @@
 import React from "react";
 import { StyleSheet, Image } from "react-native";
+import { requireCardImage } from "../utilities/cardImagePaths";
 
 export default function Card( { card } ) {
 
     return (
         <Image
             style={ stylesheet.card }
-            source={ require( `../assets/cards/png/${ card }.png` ) }
+            source={ requireCardImage[ card ]() }
         />
     );
 
@@ -14,9 +15,9 @@ export default function Card( { card } ) {
 
 const stylesheet = StyleSheet.create( {
     card: {
-        width: 50,
-        height: 50,
-        margin: "5px"
+        width: 80,
+        height: 80,
+        margin: "2%"
     },
     // : {},
   } );
