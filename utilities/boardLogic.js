@@ -24,7 +24,7 @@ const getPossibleHands = ( board, handLength, currentCoordinates, handSoFar, han
     }
 }
 
-exports.allPossibleHands = ( board, handLength ) => {
+const allPossibleHands = ( board, handLength ) => {
     let handList = [];
     for ( let row = 0; row < board.length; row++ ) for ( let column = 0; column < board[ 0 ].length; column++ )
         getPossibleHands( board, handLength, [ row, column ], [], handList );
@@ -32,8 +32,8 @@ exports.allPossibleHands = ( board, handLength ) => {
 }
 
 exports.bestHand = ( board, handLength ) => {
-    const allPossibleHands = this.allPossibleHands( board, handLength );
-    return Object.keys( allPossibleHands ).reduce( ( thisHand, thatHand ) =>
-        allPossibleHands[ thisHand ] > allPossibleHands[ thatHand ] ? thatHand : thisHand
+    const possibleHands = allPossibleHands( board, handLength );
+    return Object.keys( possibleHands ).reduce( ( thisHand, thatHand ) =>
+        possibleHands[ thisHand ] > possibleHands[ thatHand ] ? thatHand : thisHand
     ).split( "," ).map( card => parseInt( card ) );
 }

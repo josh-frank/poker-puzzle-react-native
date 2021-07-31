@@ -3,12 +3,12 @@ const { flushes, fiveUniqueCards, hashAdjust, hashValues } = require( "./lookupT
 exports.suits = { 8: "Clubs", 4: "Diamonds", 2: "Hearts", 1: "Spades" };
 const rankPrimes = [ 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41 ];
 
-exports.rank = card => ( card >>> 8 ) % 16;
-exports.suit = card => ( card >>> 12 ) % 16;
+const rank = card => ( card >>> 8 ) % 16;
+const suit = card => ( card >>> 12 ) % 16;
 
-exports.rankNames = [ "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King", "Ace" ];
-exports.suitNames = [ null, "Spades", "Hearts", null, "Diamonds", null, null, null, "Clubs" ];
-exports.cardName = card => `${ this.rankNames[ this.rank( card ) ] } of ${ this.suitNames[ this.suit( card ) ] }`;
+const rankNames = [ "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King", "Ace" ];
+const suitNames = [ null, "Spades", "Hearts", null, "Diamonds", null, null, null, "Clubs" ];
+exports.cardName = card => `${ rankNames[ rank( card ) ] } of ${ suitNames[ suit( card ) ] }`;
 
 exports.fullDeck = shuffled => {
     const result = [];
@@ -22,14 +22,14 @@ exports.fullDeck = shuffled => {
     return result;
 }
 
-exports.flush = hand => hand.reduce( ( total, card ) => total & card, 0xF000 );
+const isFlush = hand => hand.reduce( ( total, card ) => total & card, 0xF000 );
 
-exports.flushBitPattern = flush => flush.reduce( ( total, card ) => total | card , 0 ) >>> 16;
-exports.flushRank = flush => flushes[ this.flushBitPattern( flush ) ];
-exports.fiveUniqueCardsRank = hand => fiveUniqueCards[ this.flushBitPattern( hand ) ];
-exports.primeMultiplicand = hand => hand.reduce( ( total, card ) => total * ( card & 0xFF ), 1 );
+const flushBitPattern = flush => flush.reduce( ( total, card ) => total | card , 0 ) >>> 16;
+const flushRank = flush => flushes[ flushBitPattern( flush ) ];
+const fiveUniqueCardsRank = hand => fiveUniqueCards[ flushBitPattern( hand ) ];
+const primeMultiplicand = hand => hand.reduce( ( total, card ) => total * ( card & 0xFF ), 1 );
 
-exports.findFast = u => {
+const findFast = u => {
     u += 0xe91aaa35;
     u ^= u >>> 16;
     u += u << 8;
@@ -39,10 +39,10 @@ exports.findFast = u => {
 };
 
 exports.handRank = hand => {
-    if ( this.flush( hand ) ) return this.flushRank( hand );
-    let fiveUniqueCardsRank = this.fiveUniqueCardsRank( hand );
-    if ( fiveUniqueCardsRank ) return fiveUniqueCardsRank;
-    return hashValues[ this.findFast( this.primeMultiplicand( hand ) ) ];
+    if ( isFlush( hand ) ) return flushRank( hand );
+    let fiveUniqueCards = fiveUniqueCardsRank( hand );
+    if ( fiveUniqueCards ) return fiveUniqueCards;
+    return hashValues[ findFast( primeMultiplicand( hand ) ) ];
 };
 
 exports.handValue = hand => {

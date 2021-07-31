@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { ImageBackground, StyleSheet, View } from "react-native";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 
-import { fullDeck } from "./utilities/pokerLogic";
 import Board from "./components/Board";
+import { cardName, fullDeck } from "./utilities/pokerLogic";
+import { bestHand } from "./utilities/boardLogic";
 
 export default function App() {
   
@@ -18,6 +19,8 @@ export default function App() {
       deck.slice( 12, 16 ),
     ] );
   }, [] );
+
+  if ( board ) console.log( bestHand( board, 5 ).map( cardName ) );
 
   return (
     <ImageBackground 
