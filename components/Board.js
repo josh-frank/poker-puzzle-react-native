@@ -6,7 +6,7 @@ import Card from "./Card";
 
 import style from "../stylesheet"
 
-export default function Board( { gameState } ) {
+export default function Board( { gameState, setGameState } ) {
 
   return gameState.board && (
     <View style={ style.boardContainer }>
@@ -17,6 +17,8 @@ export default function Board( { gameState } ) {
           { row.map( ( card, index ) => <Card
             key={ index }
             card={ card }
+            gameState={ gameState }
+            setGameState={ setGameState }
           /> ) }
         </View> ) }
     </View>

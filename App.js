@@ -26,14 +26,17 @@ export default function App() {
     ] } );
   }, [] );
 
-  if ( gameState.board ) console.log( bestHand( gameState.board, 5 ).map( cardName ) );
+  // if ( gameState.board ) console.log( bestHand( gameState.board, 5 ).map( cardName ) );
 
   return (
     <ImageBackground 
       source={ require( "./assets/green_felt.jpg" ) }
       style={ style.backgroundImage }
     >
-      <GameScreen gameState={ gameState } />
+      <GameScreen
+        gameState={ gameState }
+        setGameState={ setGameState }
+      />
       <ExpoStatusBar style="auto" />
     </ImageBackground >
   );

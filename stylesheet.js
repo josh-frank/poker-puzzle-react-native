@@ -17,10 +17,21 @@ export default style = StyleSheet.create( {
     boardRow: {
         flexDirection: "row"
     },
-    card: {
+    cardWrapper: {
+        margin: "2%",
+    },
+    cardImage: {
         width: 80,
         height: 80,
-        margin: "2%"
+        shadowColor: '#000',
+        shadowOffset: { width: 10, height: 10 },
+        shadowOpacity: 0.8,
+        shadowRadius: 1,
+    },
+    selected: {
+        borderColor: "#FF0",
+        borderWidth: 5,
+        borderRadius: 5
     },
     // : {},
 } );
