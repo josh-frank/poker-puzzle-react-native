@@ -1,15 +1,18 @@
 import React from "react";
 
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
+
 import Card from "./Card";
 
-export default function Board( { board } ) {
+import style from "../stylesheet"
 
-  return board && (
-    <View style={ stylesheet.boardContainer }>
-        { board.map( ( row, index ) => <View
+export default function Board( { gameState } ) {
+
+  return gameState.board && (
+    <View style={ style.boardContainer }>
+        { gameState.board.map( ( row, index ) => <View
           key={ index }
-          style={ stylesheet.boardRow }
+          style={ style.boardRow }
         >
           { row.map( ( card, index ) => <Card
             key={ index }
@@ -20,13 +23,3 @@ export default function Board( { board } ) {
   );
 
 }
-
-const stylesheet = StyleSheet.create( {
-  boardContainer: {
-    flexDirection: "column",
-  },
-  boardRow: {
-    flexDirection: "row"
-  },
-  // : {},
-} );

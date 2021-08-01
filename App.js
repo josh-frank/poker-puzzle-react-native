@@ -1,51 +1,41 @@
 import React, { useEffect, useState } from "react";
-import { ImageBackground, StyleSheet, View } from "react-native";
+import { ImageBackground, StyleSheet } from "react-native";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 
-import Board from "./components/Board";
 import { cardName, fullDeck } from "./utilities/pokerLogic";
 import { bestHand } from "./utilities/boardLogic";
 
+import GameScreen from "./components/GameScreen";
+
+import style from "./stylesheet";
+
 export default function App() {
-  
-  const [ board, setBoard ] = useState( null );
+
+  const [ gameState, setGameState ] = useState( {
+    board: null,
+    guess: []
+  } );
   
   useEffect( () => {
     const deck = fullDeck( 1 );
-    setBoard( [
+    setGameState( { ...gameState, board: [
       deck.slice( 0, 4 ),
       deck.slice( 4, 8 ),
       deck.slice( 8, 12 ),
       deck.slice( 12, 16 ),
-    ] );
+    ] } );
   }, [] );
 
-  if ( board ) console.log( bestHand( board, 5 ).map( cardName ) );
+  if ( gameState.board ) console.log( bestHand( gameState.board, 5 ).map( cardName ) );
 
   return (
     <ImageBackground 
       source={ require( "./assets/green_felt.jpg" ) }
-      style={ stylesheet.backgroundImage }
+      style={ style.backgroundImage }
     >
-      <View style={ stylesheet.container }>
-        <Board board={ board } />
-        <ExpoStatusBar style="auto" />
-      </View>
+      <GameScreen gameState={ gameState } />
+      <ExpoStatusBar style="auto" />
     </ImageBackground >
   );
 
 }
-
-const stylesheet = StyleSheet.create( {
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  backgroundImage: {
-    flex: 1,
-    width: null,
-    height: null
-  },
-  // : {},
-} );
