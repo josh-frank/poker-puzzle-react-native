@@ -2,7 +2,7 @@ import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import GuessDisplay from "./GuessDisplay";
 
-export default function GameControls( { gameState } ) {
+export default function GameControls( { gameState, setGameState } ) {
 
     return (
         <View style={ style.controlsContainer }>

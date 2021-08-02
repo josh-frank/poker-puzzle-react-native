@@ -15,7 +15,10 @@ export default function GameScreen( { gameState, setGameState } ) {
                 gameState={ gameState }
                 setGameState={ setGameState }
             />
-            <GameControls gameState={ gameState }/>
+            <GameControls
+                gameState={ gameState }
+                setGameState={ setGameState }
+            />
         </View>
     );
 

@@ -38,19 +38,29 @@ export default style = StyleSheet.create( {
         flexDirection: "row",
     },
     controlButton: {
+        alignItems: "center",
+        justifyContent: "center",
         backgroundColor: "#000",
-        borderRadius:10,
+        borderRadius: 5,
+        marginLeft: 10,
+        marginRight: 10
     },
     controlButtonText: {
         color: "white",
         textAlign: "center",
-        paddingLeft : 10,
-        paddingRight : 10
+        fontSize: 24,
+        fontWeight: "bold",
+        marginLeft: 10,
+        marginRight: 10
     },
     guessDisplay: {
         width: 150,
         height: 100,
+        textAlign: "center",
         backgroundColor: "rgba( 255, 255, 255, 0.8 )",
+        borderRadius: 5,
+        marginLeft: 10,
+        marginRight: 10
     },
     // : {},
 } );
