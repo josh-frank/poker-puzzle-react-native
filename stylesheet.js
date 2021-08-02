@@ -24,7 +24,7 @@ export default style = StyleSheet.create( {
     cardImage: {
         width: 80,
         height: 80,
-        shadowColor: '#000',
+        shadowColor: "#000",
         shadowOffset: { width: 10, height: 10 },
         shadowOpacity: 0.8,
         shadowRadius: 1,
@@ -33,6 +33,19 @@ export default style = StyleSheet.create( {
         borderColor: "#FF0",
         borderWidth: 5,
         borderRadius: 5
+    },
+    controlsContainer: {
+        flexDirection: "row",
+    },
+    controlButton: {
+        backgroundColor: "#000",
+        borderRadius:10,
+    },
+    controlButtonText: {
+        color: "white",
+        textAlign: "center",
+        paddingLeft : 10,
+        paddingRight : 10
     },
     guessDisplay: {
         width: 150,
