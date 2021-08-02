@@ -8,6 +8,7 @@ export default style = StyleSheet.create( {
     },
     gameContainer: {
         flex: 1,
+        flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
     },
@@ -32,6 +33,11 @@ export default style = StyleSheet.create( {
         borderColor: "#FF0",
         borderWidth: 5,
         borderRadius: 5
+    },
+    guessDisplay: {
+        width: 150,
+        height: 100,
+        backgroundColor: "rgba( 255, 255, 255, 0.8 )",
     },
     // : {},
 } );

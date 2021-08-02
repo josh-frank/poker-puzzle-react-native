@@ -5,6 +5,7 @@ import { View } from "react-native";
 import Board from "./Board";
 
 import style from "../stylesheet"
+import GuessDisplay from "./GuessDisplay";
 
 export default function GameScreen( { gameState, setGameState } ) {
 
@@ -14,6 +15,7 @@ export default function GameScreen( { gameState, setGameState } ) {
                 gameState={ gameState }
                 setGameState={ setGameState }
             />
+            <GuessDisplay guess={ gameState.guess  }/>
         </View>
     );
 
