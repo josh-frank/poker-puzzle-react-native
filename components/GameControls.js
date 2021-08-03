@@ -1,10 +1,11 @@
 import React from "react";
 
 import { Text, TouchableOpacity, View } from "react-native";
+import { connect } from "react-redux";
 
 import GuessDisplay from "./GuessDisplay";
 
-export default function GameControls( { game } ) {
+function GameControls( { game } ) {
 
     return (
         <View style={ style.controlsContainer }>
@@ -25,3 +26,9 @@ export default function GameControls( { game } ) {
     );
 
 }
+
+const mapStateToProps = ( state, props ) => {
+    return { ...props, game: state.game };
+}
+
+export default connect( mapStateToProps )( GameControls );

@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { ImageBackground, StyleSheet } from "react-native";
+import React from "react";
+import { ImageBackground } from "react-native";
+
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 
 import { createStore } from "redux";

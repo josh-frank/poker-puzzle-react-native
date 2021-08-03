@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
 
-import { View } from "react-native";
+import { Text, View } from "react-native";
 
 import Board from "./Board";
 
 import style from "../stylesheet"
-import GameControls from "./GameControls";
 import { connect } from "react-redux";
 import { newGame } from "../redux/actions";
 import { fullDeck } from "../utilities/pokerLogic";
+
+import GameControls from "./GameControls";
 
 function GameScreen( { dispatch } ) {
     
@@ -21,6 +22,7 @@ function GameScreen( { dispatch } ) {
         <View style={ style.gameContainer }>
             <Board />
             <GameControls />
+            <Text style={ style.gameInfoText }>Test</Text>
         </View>
     );
 
