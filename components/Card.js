@@ -6,17 +6,18 @@ import { requireCardImage } from "../utilities/cardImagePaths";
 
 import style from "../stylesheet"
 
-export default function Card( { card, gameState, setGameState } ) {
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { addToGuess, removeFromGuess } from "../redux/actions";
 
-    const guessed = gameState.guess.includes( card );
+function Card( { dispatch, card, game } ) {
+
+    const guessed = game.guess.includes( card );
 
     return (
         <Pressable
             style={ style.cardWrapper }
-            onPress={ () => setGameState( {
-                board: gameState.board,
-                guess: guessed ? gameState.guess.filter( guessCard => guessCard !== card ) : [ ...gameState.guess, card ]
-            } ) }
+            onPress={ () => dispatch( guessed ? removeFromGuess( card ) : addToGuess( card ) ) }
         >
             <Image
                 style={ guessed ? { ...style.cardImage, ...style.selected } : style.cardImage }
@@ -26,3 +27,13 @@ export default function Card( { card, gameState, setGameState } ) {
     );
 
 }
+
+const mapStateToProps = ( state, props ) => {
+    return { ...props, game: state.game };
+}
+
+const mapDispatchToProps = dispatch => ( {
+    dispatch, ...bindActionCreators( { addToGuess }, dispatch ), ...bindActionCreators( { removeFromGuess }, dispatch )
+} );
+  
+export default connect( mapStateToProps, mapDispatchToProps )( Card );

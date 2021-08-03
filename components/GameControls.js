@@ -1,8 +1,10 @@
 import React from "react";
+
 import { Text, TouchableOpacity, View } from "react-native";
+
 import GuessDisplay from "./GuessDisplay";
 
-export default function GameControls( { gameState, setGameState } ) {
+export default function GameControls( { game } ) {
 
     return (
         <View style={ style.controlsContainer }>
@@ -18,7 +20,7 @@ export default function GameControls( { gameState, setGameState } ) {
             >
                 <Text style={ style.controlButtonText }>Guess</Text>
             </TouchableOpacity>
-            <GuessDisplay guess={ gameState.guess  }/>
+            <GuessDisplay />
         </View>
     );
 

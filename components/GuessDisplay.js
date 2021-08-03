@@ -6,7 +6,9 @@ import { cardName } from "../utilities/pokerLogic";
 
 import style from "../stylesheet"
 
-export default function GuessDisplay( { guess } ) {
+import { connect } from "react-redux";
+
+function GuessDisplay( { game } ) {
 
     return (
         <TextInput
@@ -14,8 +16,14 @@ export default function GuessDisplay( { guess } ) {
             multiline={ true }
             editable={ false }
             numberOfLines={ 5 }
-            value={ guess.map( cardName ).join( "\n" ) }
+            value={ game.guess ? game.guess.map( cardName ).join( "\n" ) : "" }
         />
     );
 
 }
+
+const mapStateToProps = ( state, props ) => {
+    return { ...props, game: state.game };
+}
+
+export default connect( mapStateToProps )( GuessDisplay );

@@ -5,23 +5,29 @@ import { View } from "react-native";
 import Card from "./Card";
 
 import style from "../stylesheet"
+import { connect } from "react-redux";
 
-export default function Board( { gameState, setGameState } ) {
+function Board( { game } ) {
 
-  return gameState.board && (
+  return game.board && (
     <View style={ style.boardContainer }>
-        { gameState.board.map( ( row, index ) => <View
+        { game.board.map( ( row, index ) => <View
           key={ index }
           style={ style.boardRow }
         >
           { row.map( ( card, index ) => <Card
             key={ index }
             card={ card }
-            gameState={ gameState }
-            setGameState={ setGameState }
           /> ) }
         </View> ) }
     </View>
   );
 
 }
+
+const mapStateToProps = ( state, props ) => {
+  return { ...props, game: state.game };
+}
+
+export default connect( mapStateToProps )( Board );
+
