@@ -18,3 +18,5 @@ export const newGame = () => {
 
 export const addToGuess = card => ( { type: "ADD_TO_GUESS", payload: card } );
 export const removeFromGuess = card => ( { type: "REMOVE_FROM_GUESS", payload: card } );
+
+export const makeGuess = () => ( { type: "MAKE_GUESS" } );

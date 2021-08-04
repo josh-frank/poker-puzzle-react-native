@@ -9,7 +9,7 @@ const adjacentSquares = ( coordinates, board ) => {
     return cartesianProduct( horizontal, vertical ).filter( square =>
         square[ 0 ] > -1 && square[ 1 ] > -1 && square[ 0 ] < board.length && square[ 1 ] < board[ 0 ].length && !( square[ 0 ] === coordinates[ 0 ] && square[ 1 ] === coordinates[ 1 ] )
     );
-}
+};
 
 const getPossibleHands = ( board, handLength, currentCoordinates, handSoFar, handList ) => {
     if ( handSoFar.length === handLength ) {
@@ -22,18 +22,27 @@ const getPossibleHands = ( board, handLength, currentCoordinates, handSoFar, han
             if ( handSoFar.indexOf( thisSquare ) < 0 ) { getPossibleHands( board, handLength, nextSquares[ nextSquare ], [ ...handSoFar, thisSquare ], handList ); }
         }
     }
-}
+};
 
 const allPossibleHands = ( board, handLength ) => {
     let handList = [];
     for ( let row = 0; row < board.length; row++ ) for ( let column = 0; column < board[ 0 ].length; column++ )
         getPossibleHands( board, handLength, [ row, column ], [], handList );
     return Object.fromEntries( handList.map( hand => [ hand, handRank( hand.split( "," ).map( card => parseInt( card ) ) ) ] ) );
-}
+};
 
 exports.bestHand = ( board, handLength ) => {
     const possibleHands = allPossibleHands( board, handLength );
     return Object.keys( possibleHands ).reduce( ( thisHand, thatHand ) =>
         possibleHands[ thisHand ] > possibleHands[ thatHand ] ? thatHand : thisHand
     ).split( "," ).map( card => parseInt( card ) );
-}
+};
+
+exports.evaluateHand = ( board, hand ) => {
+    const possibleHands = allPossibleHands( board, 5 );
+    if ( Object.keys( possibleHands ).indexOf( hand.sort( sortDescending ).join() ) < 0 ) return -1;
+    for ( let possibleHand of Object.keys( possibleHands) ) {
+        if ( possibleHands[ possibleHand ] < handRank( hand ) ) return 0;
+    }
+    return 1;
+};

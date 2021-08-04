@@ -10,7 +10,7 @@ export default style = StyleSheet.create( {
         flex: 1,
         flexDirection: "column",
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: "space-evenly",
     },
     boardContainer: {
         flexDirection: "column",
@@ -64,7 +64,10 @@ export default style = StyleSheet.create( {
     },
     gameInfoText: {
         // fontFamily: "CardCharacters",
+        color: "white",
         textAlign: "center",
+        fontSize: 24,
+        fontWeight: "bold",
     }
     // : {},
 } );

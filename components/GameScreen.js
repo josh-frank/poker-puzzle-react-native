@@ -20,9 +20,10 @@ function GameScreen( { dispatch } ) {
 
     return (
         <View style={ style.gameContainer }>
+            <Text style={ style.gameInfoText }>Credits: 0</Text>
             <Board />
             <GameControls />
-            <Text style={ style.gameInfoText }>Test</Text>
+            <Text style={ style.gameInfoText }>Game status</Text>
         </View>
     );
 
