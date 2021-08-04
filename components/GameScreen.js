@@ -11,7 +11,7 @@ import { fullDeck } from "../utilities/pokerLogic";
 
 import GameControls from "./GameControls";
 
-function GameScreen( { dispatch } ) {
+function GameScreen( { dispatch, game } ) {
     
     useEffect( () => {
         const deck = fullDeck( 1 );
@@ -23,7 +23,7 @@ function GameScreen( { dispatch } ) {
             <Text style={ style.gameInfoText }>Credits: 0</Text>
             <Board />
             <GameControls />
-            <Text style={ style.gameInfoText }>Game status</Text>
+            <Text style={ style.gameInfoText }>{ game.message }</Text>
         </View>
     );
 
