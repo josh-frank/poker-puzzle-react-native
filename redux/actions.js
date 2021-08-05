@@ -11,7 +11,9 @@ export const newGame = () => {
                 newDeck.slice( 4, 8 ),
                 newDeck.slice( 8, 12 ),
                 newDeck.slice( 12, 16 ),
-            ]
+            ],
+            played: false,
+            message: " "
         },
     }
 };

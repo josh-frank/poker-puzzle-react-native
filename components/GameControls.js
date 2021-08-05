@@ -4,22 +4,24 @@ import { Text, TouchableOpacity, View } from "react-native";
 
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { makeGuess } from "../redux/actions";
+import { newGame, makeGuess } from "../redux/actions";
 
 import GuessDisplay from "./GuessDisplay";
 
-function GameControls( { dispatch } ) {
+function GameControls( { dispatch, game } ) {
 
     return (
         <View style={ style.controlsContainer }>
             <TouchableOpacity
                 style={ style.controlButton }
-                onPress={ null }
+                disabled={ !game.played }
+                onPress={ () => dispatch( newGame() ) }
             >
                 <Text style={ style.controlButtonText }>Deal</Text>
             </TouchableOpacity>
             <TouchableOpacity
                 style={ style.controlButton }
+                disabled={ game.played }
                 onPress={ () => dispatch( makeGuess() ) }
             >
                 <Text style={ style.controlButtonText }>Guess</Text>
@@ -35,7 +37,7 @@ const mapStateToProps = ( state, props ) => {
 }
 
 const mapDispatchToProps = dispatch => ( {
-    dispatch, ...bindActionCreators( { makeGuess }, dispatch )
+    dispatch, ...bindActionCreators( { newGame }, dispatch ), ...bindActionCreators( { makeGuess }, dispatch )
 } );
 
 export default connect( mapStateToProps, mapDispatchToProps )( GameControls );

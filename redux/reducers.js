@@ -6,13 +6,13 @@ const initialState = {
     guess: [],
     credits: 0,
     played: false,
-    message: ""
+    message: " "
 };
 
 const gameReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case "NEW_GAME":
-            return action.payload;
+            return { ...state, ...action.payload };
         case "ADD_TO_GUESS":
             return { ...state, guess: [ ...state.guess, action.payload ] };
         case "REMOVE_FROM_GUESS":
