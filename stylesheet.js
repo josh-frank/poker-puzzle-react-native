@@ -21,13 +21,23 @@ export default style = StyleSheet.create( {
     cardWrapper: {
         margin: "2%",
     },
-    cardImage: {
+    cardFront: {
+        position: "absolute",
         width: 80,
         height: 80,
         shadowColor: "#000",
         shadowOffset: { width: 10, height: 10 },
         shadowOpacity: 0.8,
         shadowRadius: 1,
+    },
+    cardBack: {
+        width: 80,
+        height: 80,
+        shadowColor: "#000",
+        shadowOffset: { width: 10, height: 10 },
+        shadowOpacity: 0.8,
+        shadowRadius: 1,
+        backfaceVisibility: "hidden"
     },
     selected: {
         borderColor: "#FF0",
