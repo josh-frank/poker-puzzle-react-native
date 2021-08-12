@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 
-import { Animated, Button, Image, Pressable } from "react-native";
+import { Animated, Pressable } from "react-native";
 
 import { requireCardImage } from "../utilities/cardImagePaths";
 
@@ -13,6 +13,9 @@ import { addToGuess, removeFromGuess } from "../redux/actions";
 function Card( { dispatch, card, game } ) {
     
     const flipAnimation = useRef( new Animated.Value( 0 ) ).current;
+
+    let flipRotation = 0;
+    flipAnimation.addListener( ( { value } ) => flipRotation = value );
 
     const guessed = game.guess.includes( card );
 
@@ -53,7 +56,17 @@ function Card( { dispatch, card, game } ) {
     return (
         <Pressable
             style={ style.cardWrapper }
-            onPress={ () => dispatch( guessed ? removeFromGuess( card ) : addToGuess( card ) ) }
+            // onPress={ () => dispatch( guessed ? removeFromGuess( card ) : addToGuess( card ) ) }
+            onPress={ () => !!flipRotation ? flipToBack() : flipToFront() }
+            // onPress={ () => {
+            //     if ( guessed ) {
+            //         dispatch( removeFromGuess( card ) );
+            //         flipToBack();
+            //     } else {
+            //         dispatch( addToGuess( card ) );
+            //         flipToFront();
+            //     }
+            // } }
         >
             <Animated.Image
                 style={ guessed ? { ...style.cardFront, ...style.selected, ...flipToBackStyle } : { ...style.cardFront, ...flipToBackStyle } }
@@ -63,7 +76,7 @@ function Card( { dispatch, card, game } ) {
                 style={ guessed ? { ...style.cardBack, ...style.selected, ...flipToFrontStyle } : { ...style.cardBack, ...flipToFrontStyle } }
                 source={ requireCardImage[ 0 ] }
             />
-            <Button title="Flip" onPress={ flipToFront }>Flip</Button>
+            {/* <Button title="Flip" onPress={ flipToFront }>Flip</Button> */}
         </Pressable>
     );
 

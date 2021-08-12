@@ -7,14 +7,12 @@ import Board from "./Board";
 import style from "../stylesheet"
 import { connect } from "react-redux";
 import { newGame } from "../redux/actions";
-import { fullDeck } from "../utilities/pokerLogic";
 
 import GameControls from "./GameControls";
 
 function GameScreen( { dispatch, game } ) {
     
     useEffect( () => {
-        const deck = fullDeck( 1 );
         dispatch( newGame() );
     }, [] );
 
